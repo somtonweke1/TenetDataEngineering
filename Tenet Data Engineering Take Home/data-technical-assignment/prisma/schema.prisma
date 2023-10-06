@@ -1,0 +1,70 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum OfferStatus {
+  ACCEPTED
+  REJECTED
+  PENDING
+}
+
+enum SupportedPartners {
+  APPLE
+  BANANA
+  CHERRY
+  NONE
+}
+
+model User {
+  id                 Int           @id @default(autoincrement())
+  email              String        @unique
+  name               String
+  ficoScore          Int?          // Using just ficoScore
+  past_delinquencies Int?
+  createdAt          DateTime      @default(now())   
+  updatedAt          DateTime      @updatedAt        
+  applications       Application[]
+}
+
+model Application {
+  id              Int                 @id @default(autoincrement())
+  createdAt       DateTime            @default(now())   
+  updatedAt       DateTime            @updatedAt        
+  partner         SupportedPartners   @default(NONE)
+  userId          Int?
+  user            User?               @relation(fields: [userId], references: [id])
+  offers          Offer[]
+  selectedOfferId Int?                @unique
+  selectedOffer   Offer?              @relation("SelectedOffer", fields: [selectedOfferId], references: [id])
+}
+
+model Offer {
+  id             Int           @id @default(autoincrement())
+  createdAt      DateTime      @default(now())   
+  updatedAt      DateTime      @updatedAt        
+  loanAmount     Int?
+  apr            Float?
+  term           Int?
+  monthlyPayment Float?
+  rejectionReason String?
+  status         OfferStatus?
+  applicationId  Int?          @unique
+  application    Application?  @relation(fields: [applicationId], references: [id])
+  selectedBy     Application?  @relation("SelectedOffer")
+}
+
+model UserAnalytics {
+  id             Int                @id @default(autoincrement())
+  userEmail      String
+  userName       String
+  userFicoScore  Int
+  offerStatus    OfferStatus?
+  offerLoanAmount Int?
+  applicationPartner SupportedPartners
+  createdAt      DateTime           @default(now())
+}

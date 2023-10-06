@@ -1,0 +1,11 @@
+id,email,name,credit_score,past_delinquencies
+1,user1@example.com,John Doe,720,2
+2,user2@example.com,Jane Smith,680,0
+3,user3@example.com,Bob Johnson,700,1
+4,user4@example.com,Alice Brown,750,0
+5,user5@example.com,Charlie Wilson,800,3
+6,user6@example.com,Emma Davis,670,2
+7,user7@example.com,David Lee,690,1
+8,user8@example.com,Sarah Turner,710,0
+9,user9@example.com,Michael Moore,730,2
+10,user10@example.com,Olivia White,780,0
