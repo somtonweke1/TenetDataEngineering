@@ -4,13 +4,14 @@
 This prototype ETL platform captures events, stores them in a source database, and then transforms and loads that data into a destination database for analytics.
 Table of Contents
 
-    Components
-    Event Structure
-    Design Decisions
-    Setup Steps
-        Database Setups
-        Project Setup
-    Sample CURL Requests
+- [Components](#components)
+- [Event Structure](#event-structure)
+- [Design Decisions](#design-decisions)
+- [Setup Steps](#setup-steps)
+  - [Database Setups](#database-setups)
+  - [Project Setup](#project-setup)
+- [Sample CURL Requests](#sample-curl-requests)
+
 
 ## Components ##
 ### 1. Router ###
@@ -21,11 +22,11 @@ Table of Contents
 ### 2. Event Service ### 
 
     Determines supported events and stores data in the source database.
-    Implemented using the EventService class (eventService.ts).
+    Implemented using the EventService class ('eventService.ts').
 
 ### 3. Source Database (PostgreSQL) ### 
 
-    Built with Prisma (schema.prisma).
+    Built with Prisma ('schema.prisma').
 
 ### 4. ETL ### 
 
@@ -40,38 +41,43 @@ Table of Contents
 
 Events sent should adhere to:
 
-json
-
+```json
 {
   "eventType": "string",
   "userId": "number",
   "activity": "object"
 }
 
+
 ## Design Decisions ##
 
     Event-Based Architecture: Built around individual events for flexibility.
 
-    ETL Modularity: ETL logic is isolated (etl.ts) for clarity.
+    ETL Modularity: ETL logic is isolated ('etl.ts') for clarity.
 
     Database Separation: Ensures raw data collection and analytics are independent.
 
 ## Setup Steps ##
 ### Database Setups ### 
 
-    Install Prisma CLI:
-
-    bash
-
+Install Prisma CLI:
+```bash
 npm install -g prisma
 
-### Configure Connection:### 
 
-    Update DATABASE_URL in .env with your PostgreSQL connection string.
+### Configure Connection ### 
+
+Update `DATABASE_URL` in `.env` with your PostgreSQL connection string.
+
+## Run Migrations ##
+
+```bash
+npx prisma migrate dev --name init
+
 
 ## Run Migrations: ##
 
-bash
+```bash
 
     npx prisma migrate dev --name init
 
@@ -79,20 +85,20 @@ bash
 
     Install Dependencies:
 
-    bash
+    ```bash
 
 npm install
 
 ## Start the Service:##
 
-bash
+```bash
 
     npm start
 
 ## Sample CURL Requests ##
 ### Create a New User ###
 
-bash
+```bash
 
 curl -X POST http://localhost:3000/users \
 -H 'Content-Type: application/json' \
@@ -104,7 +110,7 @@ curl -X POST http://localhost:3000/users \
 
 ## Get All Users ##
 
-bash
+```bash
 
 curl -X GET http://localhost:3000/users
 
