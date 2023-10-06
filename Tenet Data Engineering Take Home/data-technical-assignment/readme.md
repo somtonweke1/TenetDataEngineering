@@ -16,26 +16,26 @@ Table of Contents
 ## Components ##
 ### 1. Router ###
 
-    Receives events and directs them to the analytics service.
-    Pre-built in the project template.
+    - Receives events and directs them to the analytics service.
+    - Pre-built in the project template.
 
 ### 2. Event Service ### 
 
-    Determines supported events and stores data in the source database.
-    Implemented using the EventService class ('eventService.ts').
-
+    - Determines supported events and stores data in the source database.
+    - Implemented using the EventService class [eventService.ts]
+  
 ### 3. Source Database (PostgreSQL) ### 
 
-    Built with Prisma ('schema.prisma').
+    - Built with Prisma [schema.prisma]
 
 ### 4. ETL ### 
 
-    Extracts, transforms, and loads data from source to destination databases.
-    Found in etl.ts inside the scripts folder.
+    - Extracts, transforms, and loads data from source to destination databases.
+    - Found in [etl.ts] inside the scripts folder.
 
 ### 5. Destination Database ### 
 
-    Optimized for data analysts to provide insights like conversion, task completion, and credit profiles.
+    - Optimized for data analysts to provide insights like conversion, task completion, and credit profiles.
 
 ## Event Structure ## 
 
@@ -47,15 +47,16 @@ Events sent should adhere to:
   "userId": "number",
   "activity": "object"
 }
+```
 
 
 ## Design Decisions ##
 
-    Event-Based Architecture: Built around individual events for flexibility.
+    - Event-Based Architecture: Built around individual events for flexibility.
 
-    ETL Modularity: ETL logic is isolated ('etl.ts') for clarity.
+    - ETL Modularity: ETL logic is isolated [etl.ts] for clarity. 
 
-    Database Separation: Ensures raw data collection and analytics are independent.
+    - Database Separation: Ensures raw data collection and analytics are independent.
 
 ## Setup Steps ##
 ### Database Setups ### 
@@ -63,38 +64,32 @@ Events sent should adhere to:
 Install Prisma CLI:
 ```bash
 npm install -g prisma
-
+```
 
 ### Configure Connection ### 
 
 Update `DATABASE_URL` in `.env` with your PostgreSQL connection string.
 
-## Run Migrations ##
-
-```bash
-npx prisma migrate dev --name init
-
-
 ## Run Migrations: ##
 
 ```bash
-
-    npx prisma migrate dev --name init
+npx prisma migrate dev --name init
+```
 
 ## Project Setup ##
 
-    Install Dependencies:
+ ###  Install Dependencies: ###
 
-    ```bash
-
+```bash 
 npm install
+```
 
-## Start the Service:##
+## Start the Service ##
 
 ```bash
 
-    npm start
-
+npm start
+```
 ## Sample CURL Requests ##
 ### Create a New User ###
 
@@ -107,12 +102,12 @@ curl -X POST http://localhost:3000/users \
     "name": "John Doe",
     "ficoScore": 720
 }'
-
+```
 ## Get All Users ##
 
 ```bash
 
 curl -X GET http://localhost:3000/users
-
+```
 
 
